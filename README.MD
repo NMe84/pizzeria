@@ -13,7 +13,8 @@ fleshing out the things that I did do. Most notably, these things will be missin
 - Customers cannot see their order's status in the frontend. To add this I would have had to add a 
   security system with account creation and login and that seemed to be way out of scope for the
   assignment. I have instead included an in-memory user provider to protect the admin area to show
-  that I know how Symfony's security works.
+  that I know how Symfony's security works. I'm aware that it's not a good idea to store passwords
+  in files that are committed to a repository, that's just something I did here to save time.
 - There isn't much validation of input besides what the annotations on the entities enforce.
 - I did not actually implement SMS notifications, but I put the framework for it there. Email notifications
   are present and will have to serve as an example. You'll find both in the EventSubscriber namespace.
@@ -24,6 +25,9 @@ fleshing out the things that I did do. Most notably, these things will be missin
   than this assignment was meant to take.
 - The unit tests are fairly pointless. I had no time left for a proper setup with DataFixtures and there
   really isn't much that is test-worthy in the system without them. But I wrote a couple assertions anyway.
+
+## Requirements
+My code requires PHP 8.1 to run.
 
 ## Installation
 After checking out the code, run the following:
