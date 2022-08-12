@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% set title = 'Welkom bij Wolters Pizza!' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    {% if orderPlaced %}
+        <h1>Bedankt voor uw bestelling</h1>
+        <p>U krijgt een statusupdate als uw pizza de oven in gaat!</p>
+    {% else %}
+        <h1>{{ title }}</h1>
+
+        {{ form_start(form) }}
+        {{ form_rest(form) }}
+        <button type="submit">Naar bestellen</button>
+        {{ form_end(form) }}
+    {% endif %}
+{% endblock %}

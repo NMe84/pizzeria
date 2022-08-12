@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% set title = 'Plaats uw bestelling' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.phone) }}
+
+    {% if pizzeria.delivery and pizzeria.pickup %}
+        {{ form_row(form.delivery) }}
+    {% endif %}
+
+    {% if pizzeria.delivery %}
+        <div id="addressFields" {% if not order.delivery %}style="display: none"{% endif %}>
+            {{ form_row(form.address) }}
+            {{ form_row(form.postalCode) }}
+            {{ form_row(form.city) }}
+        </div>
+    {% endif %}
+
+    {{ form_row(form.sendStatusUpdatesTo) }}
+
+    <button type="submit">Plaats bestelling</button>
+
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('#order_delivery').addEventListener('change', (e) => {
+                const showAddressFields = !!parseInt(e.target.options[e.target.selectedIndex].value);
+                document.querySelector('#addressFields').style.display = showAddressFields ? 'block' : 'none';
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% set title = 'Wolters Pizza Admin' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+
+    {% if orders is empty %}
+        <p>Er zijn momenteel geen actieve bestellingen.</p>
+    {% else %}
+        <form method="post" action="{{ path('admin_dashboard') }}">
+            <table>
+                <tr>
+                    <th>Tijdstip</th>
+                    <th>Pizzeria</th>
+                    <th>Pizza</th>
+                    <th>Afleveren</th>
+                    <th>Status</th>
+                </tr>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.createdAt|date('d-m-Y H:i') }}</td>
+                        <td>{{ order.pizzeria }}</td>
+                        <td>
+                            {% for pizza in order.pizzas %}
+                                {{ pizza }}
+                            {%- endfor -%}
+                            {%- if not loop.last %}, {% endif %}
+                        </td>
+                        <td>
+                            {% if order.delivery %}
+                                {{ order.address }}, {{ order.postalCode }} {{ order.city }}
+                            {% else %}
+                                N.v.t.
+                            {% endif %}
+                        </td>
+                        <td>
+                            <select name="status[{{ order.id }}]">
+                                {% for status in constant('\\App\\Enum\\OrderStatus::ALL') %}
+                                    <option value="{{ status }}" {% if order.status == status %}selected{% endif %}>{{ status }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4"></td>
+                    <td><button type="submit">Statussen bijwerken</button></td>
+                </tr>
+            </table>
+        </form>
+    {% endif %}
+{% endblock %}
