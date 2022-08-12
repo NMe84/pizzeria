@@ -70,6 +70,10 @@ class Order
         $pizza->setOrder($this);
         $this->pizzas = new ArrayCollection([$pizza]);
         $this->createdAt = new \DateTimeImmutable();
+
+        if (!$pizzeria->isPickup()) {
+            $this->delivery = true;
+        }
     }
 
     public function getId(): ?int

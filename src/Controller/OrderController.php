@@ -42,12 +42,9 @@ class OrderController extends AbstractController
     #[Route(path: '/order/{pizzeria}/{topping}/{bottom}', name: 'order')]
     public function order(Request $request, Pizzeria $pizzeria, PizzaTopping $topping, PizzaBottom $bottom, EntityManagerInterface $em): Response
     {
-        $form = $this->createForm(OrderType::class,
-            (new Order($pizzeria, new Pizza(bottom: $bottom, topping: $topping)))->setDelivery(!$pizzeria->isPickup()),
-            [
-                'allow_delivery' => $pizzeria->isDelivery(),
-                'allow_pickup' => $pizzeria->isPickup()
-            ],
+        $form = $this->createForm(OrderType::class, new Order($pizzeria, new Pizza(bottom: $bottom, topping: $topping)), [
+            'allow_delivery' => $pizzeria->isDelivery(),
+            'allow_pickup' => $pizzeria->isPickup()],
         );
         $form->handleRequest($request);
 
