@@ -5,7 +5,7 @@
 This repository purely serves to show my programming skills and style. It is not a complete project and
 it's downright inadvisable to use this as a basis for anything.
 
-## Time constraints
+## Remarks
 
 Because of time constraints I have not done everything that the assignment asked for in favour of better
 fleshing out the things that I did do. Most notably, these things will be missing in this repository:
@@ -25,6 +25,8 @@ fleshing out the things that I did do. Most notably, these things will be missin
   than this assignment was meant to take.
 - The unit tests are fairly pointless. I had no time left for a proper setup with DataFixtures and there
   really isn't much that is test-worthy in the system without them. But I wrote a couple assertions anyway.
+- I have intentionally chosen to do a form without Symfony forms in the admin. Normally I'd have chosen
+  to use Sonata Admin or something similar but I figured this would show more of what I can do.
 
 ## Requirements
 My code requires PHP 8.1 to run.
